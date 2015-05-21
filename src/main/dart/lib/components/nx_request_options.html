@@ -16,13 +16,13 @@ Nuxeo-Transaction-Timeout: 300"></i></label> </div>
           <div class="field"><input type="text" value="{{timeout | inSeconds}}"></div>
         </div>
         <div class="two fields">
-            <div class="field"><label>X-NXDocumentProperties <i class="help icon" title="This header can be used whenever a Document will be returned by the server.
-The header is forcing the server to fill up the returned document with data from schemas that matches the X-NXDocumentProperties filter.
+            <div class="field"><label>X-NXproperties <i class="help icon" title="This header can be used whenever a Document will be returned by the server.
+The header is forcing the server to fill up the returned document with data from schemas that matches the X-NXproperties filter.
 If you don't use the header only the minimal required properties of the document are returned.
 To have more properties in the returned document, you can specify a list of document schema names:
-X-NXDocumentProperties: dublincore, file
+X-NXproperties: dublincore, file
 or to have all the document content, you can use the '*' character as the filter value:
-X-NXDocumentProperties: *"></i></label></div>
+X-NXproperties: *"></i></label></div>
             <div class="field"><input type="text" value="{{schemas | asCSV}}"></div>
         </div>
         <div class="two fields">
@@ -33,7 +33,7 @@ X-NXRepository: myCustomRepositoryName"></i></label></div>
           <div class="two fields">
             <div class="field">
               <label style="display:inline">
-              X-NXContext-Category
+              X-NXenrichers.document
               <a target="_blank" style="text-decoration:none" href="http://doc.nuxeo.com/x/5wUuAQ">
                 <i class="help icon"></i>
               </a>

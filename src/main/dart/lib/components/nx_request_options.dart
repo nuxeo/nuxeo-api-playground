@@ -43,11 +43,11 @@ class NXRequestOptions extends NXElement {
     timeout = NX.timeout;
     schemas = NX.schemas;
     repository = NX.repositoryName;
-    if (NX.headers["X-NXContext-Category"] != null) {
-      NX.headers["X-NXContext-Category"].split(",").forEach((k) { contentEnrichers[k] = true; });
+    if (NX.headers["X-NXenrichers.document"] != null) {
+      NX.headers["X-NXenrichers.document"].split(",").forEach((k) { contentEnrichers[k] = true; });
     }
     contentEnrichers.changes.listen((_) {
-      NX.headers["X-NXContext-Category"] = contentEnrichers.keys.where((k) => contentEnrichers[k]).join(",");
+      NX.headers["X-NXenrichers.document"] = contentEnrichers.keys.where((k) => contentEnrichers[k]).join(",");
     });
   }
 
