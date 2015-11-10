@@ -4,11 +4,11 @@ packages:
   analyzer:
     description: analyzer
     source: hosted
-    version: "0.22.4"
+    version: "0.25.2+1"
   args:
     description: args
     source: hosted
-    version: "0.12.2+6"
+    version: "0.13.2"
   async:
     description: async
     source: hosted
@@ -36,7 +36,7 @@ packages:
   collection:
     description: collection
     source: hosted
-    version: "1.1.3"
+    version: "1.2.0"
   crypto:
     description: crypto
     source: hosted
@@ -48,7 +48,7 @@ packages:
   dart_style:
     description: dart_style
     source: hosted
-    version: "0.1.3"
+    version: "0.2.0"
   glob:
     description: glob
     source: hosted
@@ -57,10 +57,6 @@ packages:
     description: html
     source: hosted
     version: "0.12.2"
-  html5lib:
-    description: html5lib
-    source: hosted
-    version: "0.12.1"
   http:
     description: http
     source: hosted
@@ -68,7 +64,7 @@ packages:
   initialize:
     description: initialize
     source: hosted
-    version: "0.5.1+8"
+    version: "0.6.1+2"
   intl:
     description: intl
     source: hosted
@@ -92,11 +88,15 @@ packages:
   nuxeo_client:
     description: nuxeo_client
     source: hosted
-    version: "0.1.0"
+    version: "0.2.0"
   observe:
     description: observe
     source: hosted
-    version: "0.13.0+2"
+    version: "0.13.1+2"
+  package_config:
+    description: package_config
+    source: hosted
+    version: "0.1.3"
   path:
     description: path
     source: hosted
@@ -105,14 +105,22 @@ packages:
     description: petitparser
     source: hosted
     version: "1.5.0"
+  plugin:
+    description: plugin
+    source: hosted
+    version: "0.1.0"
   polymer:
     description: polymer
     source: hosted
-    version: "0.15.5+4"
+    version: "0.16.3+3"
   polymer_expressions:
     description: polymer_expressions
     source: hosted
     version: "0.13.1"
+  polymer_interop:
+    description: polymer_interop
+    source: hosted
+    version: "0.1.1"
   pool:
     description: pool
     source: hosted
@@ -124,7 +132,7 @@ packages:
   smoke:
     description: smoke
     source: hosted
-    version: "0.2.1+1"
+    version: "0.3.5"
   source_maps:
     description: source_maps
     source: hosted
@@ -160,7 +168,7 @@ packages:
   web_components:
     description: web_components
     source: hosted
-    version: "0.10.5+3"
+    version: "0.11.4+2"
   when:
     description: when
     source: hosted
@@ -172,4 +180,4 @@ packages:
   yaml:
     description: yaml
     source: hosted
-    version: "2.1.3"
+    version: "2.1.7"
