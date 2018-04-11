@@ -12,6 +12,7 @@ dependencies:
 dev_dependencies:
   unittest: '>=0.11.0 <1.0.0'
 transformers:
+- $dart2js
 - polymer:
     entry_points:
     - web/index.html
