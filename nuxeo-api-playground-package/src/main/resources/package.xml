@@ -1,7 +1,7 @@
 <package type="addon" name="nuxeo-api-playground" version="@VERSION@">
   <title>Nuxeo API Playground</title>
   <description>
-    <p>The Nuxeo API Playground addon provides a way to run Nuxeo HTTP API queries against any live repository in an educative style, understanding all the available options of the Nuxeo REST API. This package allows you to deploy on your own setup the site available at [nuxeo.github.io/api-playground](http://nuxeo.github.io/api-playground/).</p>
+    <p>The Nuxeo API Playground addon provides a way to run Nuxeo HTTP API queries against any live repository to understand all the available options of the Nuxeo REST API. This package allows you to deploy your own setup on the site available at http://nuxeo.github.io/api-playground/.</p>
   </description>
   <home-page>https://doc.nuxeo.com/nxdoc/howto-nuxeo-api-playground/</home-page>
   <vendor>Nuxeo</vendor>
