@@ -11,8 +11,7 @@
   <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
-    <platform>server-@DISTRIB_VERSION@</platform>
-    <platform>server-@DISTRIB_VERSION@-*</platform>
+    <platform>server-@NUXEO_TARGET_VERSION@</platform>
   </platforms>
   <license>LGPL 2.1</license>
   <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
