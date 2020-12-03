@@ -13,6 +13,7 @@
       <filterset>
         <filter token="VERSION" value="${maven.project.version}" />
         <filter token="NUXEO_TARGET_VERSION" value="${nuxeo.target.version}" />
+        <filter token="DISTRIBUTION_NAME" value="${nuxeo.distribution.name}" />
       </filterset>
     </copy>
 
