@@ -11,9 +11,9 @@
   <production-state>production_ready</production-state>
   <supported>true</supported>
   <platforms>
-    <platform>server-@NUXEO_TARGET_VERSION@</platform>
+    <platform>@DISTRIBUTION_NAME@-@NUXEO_TARGET_VERSION@</platform>
   </platforms>
-  <license>LGPL 2.1</license>
-  <license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
+  <license>Apache License, Version 2.0</license>
+  <license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
   <visibility>PUBLIC</visibility>
 </package>
