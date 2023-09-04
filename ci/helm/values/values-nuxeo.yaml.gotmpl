@@ -1,0 +1,47 @@
+{{- $localDomain := printf "%s.svc.cluster.local" (requiredEnv "NAMESPACE") -}}
+{{- $publicDomain := printf "%s.platform.dev.nuxeo.com" (requiredEnv "NAMESPACE") -}}
+image:
+  repository: {{ printf "%s/nuxeo/nuxeo-api-playground" (requiredEnv "DOCKER_REGISTRY") }}
+  tag: {{ requiredEnv "VERSION" | quote }}
+  pullSecrets:
+  - name: kubernetes-docker-cfg
+podLabels:
+  {{ tpl (readFile "labels.yaml.gotmpl") . | nindent 2 }}
+  dev.nuxeo.com/app: nuxeo
+  dev.nuxeo.com/resource: pod
+service:
+  labels:
+    {{ tpl (readFile "labels.yaml.gotmpl") . | nindent 4 }}
+    dev.nuxeo.com/app: nuxeo
+    dev.nuxeo.com/resource: service
+mongodb:
+  enabled: true
+  host: {{ printf "mongodb.%s" $localDomain }}
+packages: nuxeo-web-ui /packages/nuxeo-api-playground-package-*.zip
+customEnvs:
+{{- if (contains "preprod" (env "CONNECT_CLID_SECRET")) }}
+- name: NUXEO_CONNECT_URL
+  value: https://nos-preprod-connect.nuxeocloud.com/nuxeo/site/
+{{- end }}
+- name: NUXEO_CLID
+  valueFrom:
+    secretKeyRef:
+      name: {{ env "CONNECT_CLID_SECRET" | default "instance-clid" }}
+      key: instance.clid
+ingress:
+  enabled: {{ eq .Environment.Name "preview" }}
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/server-snippet: ignore_invalid_headers off;
+  hostname: {{ $publicDomain }}
+  tls:
+    - hosts:
+        - {{ $publicDomain }}
+      secretName: platform-cluster-tls
+tolerations:
+- effect: NoSchedule
+  key: team
+  operator: Equal
+  value: platform
+nodeSelector:
+  team: platform

@@ -1,0 +1,32 @@
+repositories:
+- name: bitnami
+  # use a former version of index.yaml from the git repository as Bitnami all removed charts older than 6 months from
+  # the index.yaml descriptor, see https://github.com/bitnami/charts/issues/10539
+  url: https://raw.githubusercontent.com/bitnami/charts/d2a3b454f8bb808a493d417199d3e2e09b5c650c/bitnami
+- name: nuxeo
+  url: https://chartmuseum.platform.dev.nuxeo.com/
+
+helmDefaults:
+  timeout: 300
+  wait: true
+
+releases:
+- name: nuxeo
+  chart: nuxeo/nuxeo
+  version: 3.0.14
+  condition: nuxeo.enabled
+  needs:
+  - mongodb
+  values:
+  - values/values-nuxeo.yaml.gotmpl
+- name: mongodb
+  chart: bitnami/mongodb
+  version: 13.3.1
+  condition: mongodb.enabled
+  values:
+  - values/values-mongodb.yaml.gotmpl
+
+environments:
+  preview:
+    values:
+    - environments/preview.yaml
