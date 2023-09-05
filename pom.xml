@@ -10,7 +10,7 @@
   <artifactId>nuxeo-api-playground-parent</artifactId>
   <packaging>pom</packaging>
   <name>Nuxeo API Playground - Parent POM</name>
-  <version>2023.0-SNAPSHOT</version>
+  <version>2023.0.0</version>
 
   <modules>
     <module>nuxeo-api-playground</module>
