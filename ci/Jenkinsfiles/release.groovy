@@ -20,7 +20,7 @@
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-library identifier: "platform-ci-shared-library@v0.0.28"
+library identifier: "platform-ci-shared-library@v0.0.38"
 
 pipeline {
   agent {
