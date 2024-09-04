@@ -17,7 +17,7 @@
 *     Kevin Leturc <kevin.leturc@hyland.com>
 *     Antoine Taillefer <antoine.taillefer@hyland.com>
 */
-library identifier: "platform-ci-shared-library@v0.0.38"
+library identifier: "platform-ci-shared-library@v0.0.39"
 
 String getCLIDSecret() {
   container('maven') {
