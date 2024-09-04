@@ -1,3 +1,8 @@
+environments:
+  preview:
+    values:
+    - environments/preview.yaml
+---
 repositories:
 - name: bitnami
   # use a former version of index.yaml from the git repository as Bitnami all removed charts older than 6 months from
@@ -25,8 +30,3 @@ releases:
   condition: mongodb.enabled
   values:
   - values/values-mongodb.yaml.gotmpl
-
-environments:
-  preview:
-    values:
-    - environments/preview.yaml
