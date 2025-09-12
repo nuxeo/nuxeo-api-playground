@@ -12,7 +12,7 @@
   <supported>true</supported>
   <target-platform>
     <name>@DISTRIBUTION_NAME@</name>
-    <version>[@NUXEO_PLATFORM_VERSION@,2024.0)</version>
+    <version>[2025.0,2026.0)</version>
   </target-platform>
   <license>Apache License, Version 2.0</license>
   <license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>

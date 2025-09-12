@@ -34,7 +34,7 @@ pipeline {
   environment {
     BRANCH_NAME = "${params.BRANCH}"
     BUILD_VERSION = "${params.BUILD_VERSION}"
-    JIRA_NUXEO_ADDON_MOVING_VERSION = '2023.x'
+    JIRA_NUXEO_ADDON_MOVING_VERSION = '2025.x'
     VERSION = "${nxUtils.getMajorDotMinorVersion(version: env.BUILD_VERSION)}"
   }
   stages {
