@@ -17,12 +17,7 @@ service:
 mongodb:
   enabled: true
   host: {{ printf "mongodb.%s" $localDomain }}
-packages: nuxeo-web-ui /packages/nuxeo-api-playground-package-*.zip
 customEnvs:
-{{- if (contains "preprod" (env "CONNECT_CLID_SECRET")) }}
-- name: NUXEO_CONNECT_URL
-  value: https://nos-preprod-connect.nuxeocloud.com/nuxeo/site/
-{{- end }}
 - name: NUXEO_CLID
   valueFrom:
     secretKeyRef:
