@@ -166,7 +166,7 @@ pipeline {
               def previewNamespace = "${CURRENT_NAMESPACE}-playground-${BRANCH_NAME}-preview".replaceAll('\\.', '-').toLowerCase()
               nxHelmfile.template(namespace: previewNamespace, environment: 'preview', outputDir: 'target')
               nxHelmfile.deploy(namespace: previewNamespace, environment: "preview",
-                  secrets: [[name: CONNECT_CLID_SECRET, namespace: 'platform'], [name: 'platform-cluster-tls', namespace: 'platform']])
+                  secrets: [[name: CONNECT_CLID_SECRET, namespace: 'platform'], [name: 'platform-tls', namespace: 'platform']])
               def host = sh(returnStdout: true, script: """
                 kubectl get ingress nuxeo \
                   --namespace=${previewNamespace} \
