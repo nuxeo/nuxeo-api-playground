@@ -1,5 +1,5 @@
 /*
-* (C) Copyright 2023 Nuxeo (http://nuxeo.com/) and others.
+* (C) Copyright 2023-2025 Nuxeo (http://nuxeo.com/) and others.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -17,14 +17,10 @@
 *     Kevin Leturc <kevin.leturc@hyland.com>
 *     Antoine Taillefer <antoine.taillefer@hyland.com>
 */
-library identifier: "platform-ci-shared-library@v0.0.40"
+library identifier: "platform-ci-shared-library@v0.0.72"
 
-String getCLIDSecret() {
-  container('maven') {
-    def nuxeoParentVersion = readMavenPom().getParent().getVersion()
-    // target connect preprod if nuxeo-parent is a snapshot version or a build version
-    return nuxeoParentVersion.matches("^\\d+\\.\\d+(-SNAPSHOT|\\.\\d+)\$") ? 'instance-clid-preprod' : 'instance-clid'
-  }
+String getCLIDSecret(nuxeoVersion) {
+  return nuxeoVersion.matches("^\\d+\\.\\d+(-SNAPSHOT|\\.\\d+)\$") ? 'instance-clid-preprod' : 'instance-clid'
 }
 
 pipeline {
@@ -37,7 +33,8 @@ pipeline {
     githubProjectProperty(projectUrlStr: 'https://github.com/nuxeo/nuxeo-api-playground')
   }
   environment {
-    CONNECT_CLID_SECRET = getCLIDSecret()
+    NUXEO_VERSION = nxMvn.getProperty(key: 'project.parent.version')
+    CONNECT_CLID_SECRET = getCLIDSecret(NUXEO_VERSION)
     CURRENT_NAMESPACE = nxK8s.getCurrentNamespace()
     MAVEN_OPTS = "$MAVEN_OPTS -Xms512m -Xmx3072m"
     VERSION = nxUtils.getVersion()
@@ -84,12 +81,16 @@ pipeline {
     stage('Build Docker image') {
       steps {
         container('maven') {
-          nxWithGitHubStatus(context: 'docker/build') {
-            script {
+          script {
+            def clid = nxK8s.getSecretData(namespace: 'platform', name: env.CONNECT_CLID_SECRET, key: 'instance\\.clid')
+            def connectUrl = env.CONNECT_CLID_SECRET.contains('preprod') ? CONNECT_PREPROD_SITE_URL : CONNECT_PROD_SITE_URL
+            nxWithGitHubStatus(context: 'docker/build') {
               sh "mkdir -p ci/docker/target && cp ${NUXEO_API_PLAYGROUND_PACKAGE_PATH} ci/docker/target"
-              def nuxeoVersion = sh(returnStdout: true,
-                  script: 'mvn org.apache.maven.plugins:maven-help-plugin:3.3.0:evaluate -Dexpression=nuxeo.platform.version -q -DforceStdout')
-              nxDocker.build(skaffoldFile: 'ci/docker/skaffold.yaml', envVars: ["NUXEO_VERSION=${nuxeoVersion}"])
+              def nuxeoVersion = nxMvn.getProperty(key: 'nuxeo.platform.version')
+              // use withEnv for clid to not print it to the console, which nxDocker does
+              withEnv(["CLID=${clid}"]) {
+                nxDocker.build(skaffoldFile: 'ci/docker/skaffold.yaml', envVars: ["CONNECT_URL=${connectUrl}", "NUXEO_VERSION=${nuxeoVersion}"])
+              }
             }
           }
         }
