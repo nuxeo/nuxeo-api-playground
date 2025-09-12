@@ -1,0 +1,12 @@
+nuxeo:
+  image:
+    repository: {{ printf "%s/nuxeo/nuxeo-api-playground" (requiredEnv "DOCKER_REGISTRY") }}
+    tag: {{ requiredEnv "VERSION" | quote }}
+  customEnvs:
+  - name: NUXEO_CLID
+    valueFrom:
+      secretKeyRef:
+        name: {{ env "CONNECT_CLID_SECRET" | default "instance-clid" }}
+        key: instance.clid
+  ingress:
+    enabled: true
