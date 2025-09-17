@@ -34,7 +34,9 @@ pipeline {
   environment {
     BRANCH_NAME = "${params.BRANCH}"
     BUILD_VERSION = "${params.BUILD_VERSION}"
-    JIRA_NUXEO_ADDON_MOVING_VERSION = '2023.x'
+    JIRA_PROJECT = 'NXP'
+    JIRA_MOVING_VERSION = 'playground-2023.x'
+    JIRA_RELEASED_VERSION = "playground-${VERSION}"
     VERSION = "${nxUtils.getMajorDotMinorVersion(version: env.BUILD_VERSION)}"
   }
   stages {
@@ -92,28 +94,21 @@ pipeline {
         }
       }
     }
-    stage('Release Jira version') {
+    stage('Release Project') {
       steps {
         container('maven') {
           script {
-            def jiraVersionName = "${VERSION}"
-            // create a new released version in Jira
-            def jiraVersion = [
-                project: 'PLAY',
-                name: jiraVersionName,
+            nxProject.release(
+              jql                  : "project = ${JIRA_PROJECT} and fixVersion = ${JIRA_MOVING_VERSION}",
+              newJiraVersion       : [
+                project    : env.JIRA_PROJECT,
+                name       : env.JIRA_RELEASED_VERSION,
                 description: "API Playground Addon ${VERSION}",
                 releaseDate: LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE),
-                released: true,
-            ]
-            nxJira.newVersion(version: jiraVersion)
-            // find Jira tickets included in this release and update them
-            def jiraTickets = nxJira.jqlSearch(jql: "project = PLAY and fixVersion = ${JIRA_NUXEO_ADDON_MOVING_VERSION}")
-            def previousVersion = nxUtils.getPreviousMajorDotMinorVersion()
-            def changelog = nxGit.getChangeLog(previousVersion: previousVersion, version: env.VERSION)
-            def committedIssues = jiraTickets.data.issues.findAll { changelog.contains(it.key) }
-            committedIssues.each {
-              nxJira.editIssueFixVersion(idOrKey: it.key, fixVersionToRemove: env.JIRA_NUXEO_ADDON_MOVING_VERSION, fixVersionToAdd: jiraVersionName)
-            }
+                released   : true,
+              ],
+              jiraMovingVersionName: env.JIRA_MOVING_VERSION,
+            )
           }
         }
       }
