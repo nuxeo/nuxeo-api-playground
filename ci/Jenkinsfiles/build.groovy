@@ -17,7 +17,7 @@
 *     Kevin Leturc <kevin.leturc@hyland.com>
 *     Antoine Taillefer <antoine.taillefer@hyland.com>
 */
-library identifier: "platform-ci-shared-library@v0.0.72"
+library identifier: "platform-ci-shared-library@v0.0.73"
 
 String getCLIDSecret(nuxeoVersion) {
   return nuxeoVersion.matches("^\\d+\\.\\d+(-SNAPSHOT|\\.\\d+)\$") ? 'instance-clid-preprod' : 'instance-clid'
