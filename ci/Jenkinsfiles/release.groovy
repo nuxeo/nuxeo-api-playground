@@ -121,15 +121,10 @@ pipeline {
   }
 
   post {
-    success {
+    always {
       script {
-        currentBuild.description = "Release ${VERSION}"
-        nxSlack.success(message: "Successfully released nuxeo/nuxeo-api-playground ${VERSION}: ${BUILD_URL}")
-      }
-    }
-    unsuccessful {
-      script {
-        nxSlack.error(message: "Failed to release nuxeo/nuxeo-api-playground ${VERSION}: ${BUILD_URL}")
+        nxUtils.setReleaseDescription()
+        nxUtils.notifyReleaseStatusIfNecessary()
       }
     }
   }

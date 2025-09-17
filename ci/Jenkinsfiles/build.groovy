@@ -195,8 +195,9 @@ pipeline {
   post {
     always {
       script {
-        currentBuild.description = "Build ${VERSION}"
+        nxUtils.setBuildDescription()
         nxJira.updateIssues()
+        nxUtils.notifyBuildStatusIfNecessary()
       }
     }
   }
