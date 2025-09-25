@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <fragment version="1">
+
+  <extension target="web#FILTER">
+    <filter>
+      <filter-name>PlaygroundContentTypeRewriteFilter</filter-name>
+      <filter-class>org.nuxeo.ecm.platform.playground.PlaygroundContentTypeRewriteFilter</filter-class>
+    </filter>
+    <filter-mapping>
+      <filter-name>PlaygroundContentTypeRewriteFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <!-- Avoid re-running on forwards to prevent surprises -->
+      <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+  </extension>
+
   <install>
     <!--  unzip the war template -->
     <unzip from="${bundle.fileName}" to="/" prefix="web">

@@ -24,7 +24,7 @@ library identifier: "platform-ci-shared-library@v0.0.73"
 
 pipeline {
   agent {
-    label 'jenkins-nuxeo-jsf-lts-2023'
+    label 'jenkins-nuxeo-api-playground-lts-2025'
   }
   options {
     buildDiscarder(logRotator(daysToKeepStr: '60', numToKeepStr: '60', artifactNumToKeepStr: '5'))
@@ -35,7 +35,7 @@ pipeline {
     BRANCH_NAME = "${params.BRANCH}"
     BUILD_VERSION = "${params.BUILD_VERSION}"
     JIRA_PROJECT = 'NXP'
-    JIRA_MOVING_VERSION = 'playground-2023.x'
+    JIRA_MOVING_VERSION = 'playground-2025.x'
     JIRA_RELEASED_VERSION = "playground-${VERSION}"
     VERSION = "${nxUtils.getMajorDotMinorVersion(version: env.BUILD_VERSION)}"
   }
