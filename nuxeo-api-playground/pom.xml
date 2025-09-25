@@ -11,6 +11,14 @@
   <name>Nuxeo API Playground</name>
   <description>Nuxeo API Playground</description>
 
+  <dependencies>
+    <!-- Java specifications -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
