@@ -44,19 +44,8 @@
 
   <repositories>
     <repository>
-      <id>maven-public</id>
-      <url>https://packages.nuxeo.com/repository/maven-public/</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>maven-internal</id>
-      <url>https://packages.nuxeo.com/repository/maven-internal/</url>
+      <id>maven-public-lts</id>
+      <url>https://packages.nuxeo.com/repository/maven-public-lts</url>
       <releases>
         <enabled>true</enabled>
       </releases>
@@ -66,6 +55,20 @@
       </snapshots>
     </repository>
   </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>maven-public-lts</id>
+      <url>https://packages.nuxeo.com/repository/maven-public-lts</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <!-- no need to enable snapshots for plugin repository -->
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
   <scm>
     <connection>scm:git:git://github.com/nuxeo/nuxeo-api-playground.git</connection>
