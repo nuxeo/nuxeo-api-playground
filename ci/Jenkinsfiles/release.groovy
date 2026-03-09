@@ -26,11 +26,6 @@ pipeline {
   agent {
     label 'jenkins-nuxeo-api-playground-lts-2025'
   }
-  options {
-    buildDiscarder(logRotator(daysToKeepStr: '60', numToKeepStr: '60', artifactNumToKeepStr: '5'))
-    disableConcurrentBuilds()
-    githubProjectProperty(projectUrlStr: 'https://github.com/nuxeo/nuxeo-api-playground')
-  }
   environment {
     BRANCH_NAME = "${params.BRANCH}"
     BUILD_VERSION = "${params.BUILD_VERSION}"
